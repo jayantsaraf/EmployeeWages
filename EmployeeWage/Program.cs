@@ -16,7 +16,6 @@ namespace EmployeeWage
             ////Check Attendance function
             Random random = new Random();
 
-            
             ////program working
 
             int empCheck = random.Next(0, 2);
@@ -43,7 +42,24 @@ namespace EmployeeWage
             {
                 empHrs = 8;
             }
-            
+            else
+            {
+                empHrs = 4;////Assuming part time hours = 4
+            }
+
+            //switch method to calculate part time wages
+            switch (empCheck)
+            {
+                case 0:
+                    empHrs = 4;
+                    break;
+                case 1:
+                    empHrs = 8;
+                    break;
+                default:
+                    empHrs = 0;
+                    break;
+            }
 
             empWage = empHrs * EMP_RATE_PER_HOUR;
             Console.WriteLine("Employee wage = " + empWage);
@@ -70,6 +86,12 @@ namespace EmployeeWage
                 totalEmpWage += empWage;
             }
             Console.WriteLine("Total Employee Wage = " + totalEmpWage);
+
+
+            ////Wages in a month
+            empWage = empHrs * EMP_RATE_PER_HOUR*20;
+            Console.WriteLine("Wages in a month = " + empWage);
+
 
 
         }
