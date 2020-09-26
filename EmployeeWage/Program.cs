@@ -41,7 +41,10 @@ namespace EmployeeWage
             {
                 empHrs = 8;
             }
-            
+            else
+            {
+                empHrs = 4;////Assuming part time hours = 4
+            }
 
             empWage = empHrs * EMP_RATE_PER_HOUR;
             Console.WriteLine("Employee wage = " + empWage);
