@@ -34,6 +34,7 @@ namespace EmployeeWage
             {
                 empHrs = 8;
             }
+            
 
             empWage = empHrs * EMP_RATE_PER_HOUR;
             Console.WriteLine("Employee wage = " + empWage);
