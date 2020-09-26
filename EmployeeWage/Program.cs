@@ -14,6 +14,7 @@ namespace EmployeeWage
 
             ////Check Attendance function
             Random random = new Random();
+
             ////program working
 
             int empCheck = random.Next(0, 2);
@@ -59,6 +60,13 @@ namespace EmployeeWage
 
             empWage = empHrs * EMP_RATE_PER_HOUR;
             Console.WriteLine("Employee wage = " + empWage);
+
+
+            ////Wages in a month
+            empWage = empHrs * EMP_RATE_PER_HOUR*20;
+            Console.WriteLine("Wages in a month = " + empWage);
+
+
 
         }
     }
