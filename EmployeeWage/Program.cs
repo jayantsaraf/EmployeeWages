@@ -12,8 +12,73 @@ namespace EmployeeWage
         public const int MAX_HRS = 100;
 
 
+
+        public static void Main()
+        {
+            Console.WriteLine("Welcome to Employee Wage Computation Program!");
+
+            ////Check Attendance function
+            Random random = new Random();
+
+            ////program working
+
+            int empCheck = random.Next(0, 2);
+            if (empCheck == IS_FULL_TIME)
+            {
+                Console.WriteLine("Employee is present");
+            }
+            else
+            {
+                Console.WriteLine("Employee is absent");
+            }
+
+
+            ////variable
+            int empHrs = 0;
+            int empWage = 0;
+            int totalHrs = 0;
+            int totalEmpWage = 0;
+
+            ////Computation of Wages
+
+            empCheck = random.Next(0, 2);
+            if (empCheck == IS_FULL_TIME)
+            {
+                empHrs = 8;
+            }
+            else
+            {
+                empHrs = 4;////Assuming part time hours = 4
+            }
+
+            //switch method to calculate part time wages
+            switch (empCheck)
+            {
+                case 0:
+                    empHrs = 4;
+                    break;
+                case 1:
+                    empHrs = 8;
+                    break;
+                default:
+                    empHrs = 0;
+                    break;
+            }
+
+            empWage = empHrs * EMP_RATE_PER_HOUR;
+            Console.WriteLine("Employee wage = " + empWage);
+
+            ////Calculate Wages till total hours less than 100 and Days less than 20
+            int totalWage = CalculateWage();
+            Console.WriteLine("Total employee wage for given condition is = " + totalWage);
+
+            ////Wages in a month
+            empWage = empHrs * EMP_RATE_PER_HOUR * NUMBER_OF_DAYS;
+            Console.WriteLine("Wages in a month = " + empWage);
+        }
         public static int CalculateWage()
         {
+            Random random = new Random();
             int empCheck = 0, empHrs = 0, totalHrs = 0, empWage = 0, totalEmpWage = 0, days = 0;
             while (totalHrs <= MAX_HRS && days < NUMBER_OF_DAYS)
             {
@@ -30,77 +95,12 @@ namespace EmployeeWage
                 }
                 days += 1;
             }
-            empWage = totalHrs * EMP_RATE_PER_HOUR * DAYS;
+            empWage = totalHrs * EMP_RATE_PER_HOUR * NUMBER_OF_DAYS;
             totalEmpWage += empWage;
-        }
-        Console.WriteLine("Total Employee Wage = " + totalEmpWage);
             return totalEmpWage;
         }
 
-    static void Main(string[] args)
-    {
-        Console.WriteLine("Welcome to Employee Wage Computation Program!");
-
-        ////Check Attendance function
-        Random random = new Random();
-
-        ////program working
-
-        int empCheck = random.Next(0, 2);
-        if (empCheck == IS_FULL_TIME)
-        {
-            Console.WriteLine("Employee is present");
-        }
-        else
-        {
-            Console.WriteLine("Employee is absent");
-        }
-
-
-        ////variable
-        int empHrs = 0;
-        int empWage = 0;
-        int totalHrs = 0;
-        int totalEmpWage = 0;
-
-        ////Computation of Wages
-
-        empCheck = random.Next(0, 2);
-        if (empCheck == IS_FULL_TIME)
-        {
-            empHrs = 8;
-        }
-        else
-        {
-            empHrs = 4;////Assuming part time hours = 4
-        }
-
-        //switch method to calculate part time wages
-        switch (empCheck)
-        {
-            case 0:
-                empHrs = 4;
-                break;
-            case 1:
-                empHrs = 8;
-                break;
-            default:
-                empHrs = 0;
-                break;
-        }
-
-        empWage = empHrs * EMP_RATE_PER_HOUR;
-        Console.WriteLine("Employee wage = " + empWage);
-
-        ////Calculate Wages till total hours less than 100 and Days less than 20
-        CalculateWage();
-
-        ////Wages in a month
-        empWage = empHrs * EMP_RATE_PER_HOUR * NUMBER_OF_DAYS;
-        Console.WriteLine("Wages in a month = " + empWage);
-
-
-
     }
+
 }
-}
+
