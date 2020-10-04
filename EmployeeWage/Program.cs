@@ -11,18 +11,21 @@ namespace EmployeeWage
         public int empRate;
         public int workHrs;
         public int totalEmpWage;
+        public int[] dailyWage;
         public CompanyEmpWage(string Company, int workDays, int empRate, int workHrs)
         {
             this.company = Company;
             this.workDays = workDays;
             this.empRate = empRate;
             this.workHrs = workHrs;
+            this.dailyWage = new int[workDays];
         }
         public void SetEmpWage(int totalWage)
         {
             this.totalEmpWage = totalWage;
             Console.WriteLine("Employee wage for" + this.company + " = " + totalEmpWage);
         }
+
     }
     class EmpWageBuilderObject
     {
@@ -52,7 +55,8 @@ namespace EmployeeWage
         public int CalculateWage(CompanyEmpWage company)
         {
             Random random = new Random();
-            int empCheck = 0, empHrs = 0, totalHrs = 0, empWage = 0, totalEmpWage = 0, days = 0;
+            int empCheck = 0, empHrs = 0, totalHrs = 0, empWage = 0, totalEmpWage = 0, days = 0,i=0;
+            int[] dailyWage = new int[company.workDays];
             while (totalHrs <= company.workHrs && days < company.workDays)
             {
                 empCheck = random.Next(0, 2);
@@ -66,12 +70,12 @@ namespace EmployeeWage
                     empHrs = 4;
                     totalHrs += empHrs;
                 }
+                company.dailyWage[i++] = empHrs * company.empRate;
                 days += 1;
             }
             empWage = totalHrs * company.empRate * company.workDays;
             totalEmpWage += empWage;
             return totalEmpWage;
-
         }
         public static void Main()
         {
