@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EmployeeWage
 {
@@ -7,14 +8,15 @@ namespace EmployeeWage
         public static void Main()
         {
             Console.WriteLine("Welcome to Employee Wage Computation Program!");
-            EmpWageBuilderObject company1 = new EmpWageBuilderObject();
-            company1.AddEmployee("Bajaj", 30, 50, 90);
-            company1.ComputeWage();
-            EmpWageBuilderObject company2 = new EmpWageBuilderObject();
-            company2.AddEmployee("Philips", 60, 70, 100);
-            company2.ComputeWage();
-            ////Check Attendance function
-            Random random = new Random();
+            EmpWageBuilderObject company = new EmpWageBuilderObject();
+            company.AddEmployee("Bajaj", 30, 50, 90);
+            company.AddEmployee("Philips", 60, 70, 100);
+            company.ComputeWage();
+
+            Console.WriteLine("Enter the company name to find Employee Wage");
+            string companyName = Console.ReadLine();
+            Console.WriteLine("The total Employee Wage for " + companyName + " is " + company.getTotalWageByCompany(companyName));
+
 
         }
     }
