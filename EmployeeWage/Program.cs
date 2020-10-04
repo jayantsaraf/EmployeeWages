@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EmployeeWage
 {
-   
+
     public class CompanyEmpWage
     {
         public string company;
@@ -27,7 +27,7 @@ namespace EmployeeWage
         }
 
     }
-    class EmpWageBuilderObject
+    public class EmpWageBuilderObject
     {
         //// Constants
         public const int NUMBER_OF_DAYS = 20;
@@ -37,16 +37,21 @@ namespace EmployeeWage
 
         public int numOfEmp = 0;
         List<CompanyEmpWage> CompanyWageList = new List<CompanyEmpWage>();
-
+        Dictionary<string, CompanyEmpWage> companyToWage;
         public void AddEmployee(string companyName, int workDays, int empRate, int workHrs)
         {
             CompanyEmpWage c1 = new CompanyEmpWage(companyName, workDays, empRate, workHrs);
             CompanyWageList.Add(c1);
         }
+        public int getTotalWageByCompany(string companyName)
+        {
+            int totalWage = companyToWage[companyName].totalEmpWage;
+            return totalWage;
+        }
 
         public void ComputeWage()
         {
-            foreach(CompanyEmpWage i in CompanyWageList)
+            foreach (CompanyEmpWage i in CompanyWageList)
             {
                 int totalWage = CalculateWage(i);
                 i.SetEmpWage(totalWage);
@@ -55,7 +60,7 @@ namespace EmployeeWage
         public int CalculateWage(CompanyEmpWage company)
         {
             Random random = new Random();
-            int empCheck = 0, empHrs = 0, totalHrs = 0, empWage = 0, totalEmpWage = 0, days = 0,i=0;
+            int empCheck = 0, empHrs = 0, totalHrs = 0, empWage = 0, totalEmpWage = 0, days = 0, i = 0;
             int[] dailyWage = new int[company.workDays];
             while (totalHrs <= company.workHrs && days < company.workDays)
             {
@@ -80,14 +85,15 @@ namespace EmployeeWage
         public static void Main()
         {
             Console.WriteLine("Welcome to Employee Wage Computation Program!");
-            EmpWageBuilderObject company1 = new EmpWageBuilderObject();
-            company1.AddEmployee("Bajaj", 30, 50, 90);
-            company1.ComputeWage();
-            EmpWageBuilderObject company2 = new EmpWageBuilderObject();
-            company2.AddEmployee("Philips", 60, 70, 100);
-            company2.ComputeWage();
-            ////Check Attendance function
-            Random random = new Random();
+            EmpWageBuilderObject company = new EmpWageBuilderObject();
+            company.AddEmployee("Bajaj", 30, 50, 90);
+            company.AddEmployee("Philips", 60, 70, 100);
+            company.ComputeWage();
+
+            Console.WriteLine("Enter the company name to find Employee Wage");
+            string companyName = Console.ReadLine();
+            Console.WriteLine("The total Employee Wage for " + companyName + " is " + company.getTotalWageByCompany(companyName));
+
 
         }
 
