@@ -2,8 +2,7 @@
 
 namespace EmployeeWage
 {
-
-    class Program
+    class EmpWageBuilderObject
     {
         //// Constants
         public const int NUMBER_OF_DAYS = 20;
@@ -11,23 +10,23 @@ namespace EmployeeWage
         public const int EMP_RATE_PER_HOUR = 20;
         public const int MAX_HRS = 100;
 
+        public string company;
+        public int workDays;
+        public int empRate;
+        public int workHrs;
 
-
-        public static void Main()
+        public EmpWageBuilderObject(string Company, int workDays, int empRate, int workHrs)
         {
-            Console.WriteLine("Welcome to Employee Wage Computation Program!");
-            CalculateWage("Reliance", 20, 40, 100);
-            CalculateWage("Bajaj", 30, 50, 96);
-            ////Check Attendance function
-            Random random = new Random();
-
+            this.company = Company;
+            this.workDays = workDays;
+            this.empRate = empRate;
+            this.workHrs = workHrs;
         }
-
-        private static void CalculateWage(string company, int workDays, int empRate, int workHrs)
+        public void CalculateWage()
         {
             Random random = new Random();
             int empCheck = 0, empHrs = 0, totalHrs = 0, empWage = 0, totalEmpWage = 0, days = 0;
-            while (totalHrs <= workHrs && days < workDays)
+            while (totalHrs <= this.workHrs && days < this.workDays)
             {
                 empCheck = random.Next(0, 2);
                 if (empCheck == IS_FULL_TIME)
@@ -42,9 +41,22 @@ namespace EmployeeWage
                 }
                 days += 1;
             }
-            empWage = totalHrs * empRate * workDays;
+            empWage = totalHrs * this.empRate * this.workDays;
             totalEmpWage += empWage;
             Console.WriteLine("Employee wage for " + company + " = " + totalEmpWage);
+
+        }
+
+
+        public static void Main()
+        {
+            Console.WriteLine("Welcome to Employee Wage Computation Program!");
+            EmpWageBuilderObject company1 = new EmpWageBuilderObject("Reliance", 20, 40, 100);
+            company1.CalculateWage();
+            EmpWageBuilderObject company2 = new EmpWageBuilderObject("Bajaj", 30, 50, 90);
+            company2.CalculateWage();
+            ////Check Attendance function
+            Random random = new Random();
 
         }
 
