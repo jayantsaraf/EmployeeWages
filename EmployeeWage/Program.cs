@@ -2,6 +2,12 @@
 
 namespace EmployeeWage
 {
+    public interface IComputeWage
+    {
+        public void AddEmployee(string company, int empRate, int workDays, int WorkHrs);
+        public void ComputeWage();
+
+    }
     public class CompanyEmpWage
     {
         public string company;
@@ -22,7 +28,7 @@ namespace EmployeeWage
             Console.WriteLine("Employee wage for" + this.company + " = " + totalEmpWage);
         }
     }
-    class EmpWageBuilderObject
+    class EmpWageBuilderObject : IComputeWage
     {
         //// Constants
         public const int NUMBER_OF_DAYS = 20;
