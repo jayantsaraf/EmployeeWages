@@ -1,13 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EmployeeWage
 {
-    public interface IComputeWage
-    {
-        public void AddEmployee(string company, int empRate, int workDays, int WorkHrs);
-        public void ComputeWage();
-
-    }
+   
     public class CompanyEmpWage
     {
         public string company;
@@ -28,7 +24,7 @@ namespace EmployeeWage
             Console.WriteLine("Employee wage for" + this.company + " = " + totalEmpWage);
         }
     }
-    class EmpWageBuilderObject : IComputeWage
+    class EmpWageBuilderObject
     {
         //// Constants
         public const int NUMBER_OF_DAYS = 20;
@@ -37,19 +33,20 @@ namespace EmployeeWage
         public const int MAX_HRS = 100;
 
         public int numOfEmp = 0;
-        public CompanyEmpWage[] companyWageArray = new CompanyEmpWage[5];
+        List<CompanyEmpWage> CompanyWageList = new List<CompanyEmpWage>();
 
-        public void AddEmployee(string company, int workDays, int empRate, int workHrs)
+        public void AddEmployee(string companyName, int workDays, int empRate, int workHrs)
         {
-            companyWageArray[this.numOfEmp++] = new CompanyEmpWage(company, workDays, empRate, workHrs);
+            CompanyEmpWage c1 = new CompanyEmpWage(companyName, workDays, empRate, workHrs);
+            CompanyWageList.Add(c1);
         }
 
         public void ComputeWage()
         {
-            for(int i=0; i<numOfEmp;i++)
+            foreach(CompanyEmpWage i in CompanyWageList)
             {
-                int totalWage = CalculateWage(companyWageArray[i]);
-                companyWageArray[i].SetEmpWage(totalWage);
+                int totalWage = CalculateWage(i);
+                i.SetEmpWage(totalWage);
             }
         }
         public int CalculateWage(CompanyEmpWage company)
